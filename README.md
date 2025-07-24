@@ -20,6 +20,7 @@ This guide provides detailed setup instructions, code examples, and usage detail
 1. Install the Wikipedia integration:
    ```bash
    pip install wikipedia-api
+   pip install wikipedia
    ```
 2. Ensure internet access for API calls.
 
@@ -27,18 +28,17 @@ This guide provides detailed setup instructions, code examples, and usage detail
 
 1. **Basic Query**:
    ```python
-   from langchain_community.tools import WikipediaQueryRun
-   from langchain_community.utilities import WikipediaAPIWrapper
-
-   # Initialize the tool with a limit of 1 result and 100 characters per summary
-   api_wrapper = WikipediaAPIWrapper(top_k_results=1, doc_content_chars_max=100)
-   tool = WikipediaQueryRun(api_wrapper=api_wrapper)
-
-   # Query Wikipedia for "LangChain"
-   result = tool.invoke("LangChain")
-   print(result)
-   # Output: Page: LangChain\nSummary: LangChain is a framework for building applications with LLMs...
-   ```
+    from langchain_community.tools import WikipediaQueryRun
+    from langchain_community.utilities import WikipediaAPIWrapper
+    
+    # Initialize the tool with a limit of 1 result and 100 characters per summary
+    api_wrapper = WikipediaAPIWrapper(top_k_results=1, doc_content_chars_max=100)
+    tool = WikipediaQueryRun(api_wrapper=api_wrapper)
+    
+    # Query Wikipedia for "LangChain"
+    result = tool.invoke("LangChain")
+    print(result) 
+```
 
 2. **Multiple Results**:
    ```python
