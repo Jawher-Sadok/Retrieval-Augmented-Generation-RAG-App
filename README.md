@@ -42,11 +42,11 @@ This guide provides detailed setup instructions, code examples, and usage detail
 
 2. **Multiple Results**:
    ```python
-   api_wrapper = WikipediaAPIWrapper(top_k_results=3, doc_content_chars_max=200)
-   tool = WikipediaQueryRun(api_wrapper=api_wrapper)
-   result = tool.invoke("Artificial Intelligence")
-   print(result)
-   # Output: Multiple page summaries for AI-related topics
+     api_wrapper = WikipediaAPIWrapper(top_k_results=3, doc_content_chars_max=200)
+     tool = WikipediaQueryRun(api_wrapper=api_wrapper)
+     result = tool.invoke("Artificial Intelligence")
+     print(result)
+     # Output: Multiple page summaries for AI-related topics
    ```
 
 3. **Agent Integration**:
@@ -64,7 +64,7 @@ This guide provides detailed setup instructions, code examples, and usage detail
    result = executor.invoke({"input": "What is Python?"})
    print(result)
    # Output: Summary of Python programming language from Wikipedia
-   ```
+  ```
 
 **Commands**:
 - `tool.invoke(query)`: Executes a Wikipedia search with the given query string.
