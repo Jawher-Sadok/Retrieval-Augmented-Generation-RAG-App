@@ -23,6 +23,12 @@ This guide provides detailed setup instructions, code examples, and usage detail
    pip install wikipedia
    ```
 2. Ensure internet access for API calls.
+3. 
+tools: List of available tools (e.g., DuckDuckGoSearchRun.....).
+
+tool_names: Names of the tools (automatically derived from tools).
+
+agent_scratchpad: Stores the agent's intermediate thoughts/actions during execution.
 
 **Code Examples**:
 
