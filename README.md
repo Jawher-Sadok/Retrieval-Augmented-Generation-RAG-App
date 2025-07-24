@@ -30,6 +30,38 @@ tool_names: Names of the tools (automatically derived from tools).
 
 agent_scratchpad: Stores the agent's intermediate thoughts/actions during execution.
 
+prompt_template = """
+Answer the following question as best you can. You have access to the following tool:
+
+{tools}
+
+Use the following format:
+
+Question: the input question you must answer
+Thought: think about what to do
+Action: the action to take (must be one of [{tool_names}])
+Action Input: the input to the action
+Observation: the result of the action
+... (this Thought/Action/Action Input/Observation can repeat N times)
+Thought: I now know the final answer
+Final Answer: the final answer to the original question
+
+Begin!
+
+Question: {input}
+Thought: {agent_scratchpad}"""
+
+
+prompt = PromptTemplate.from_template(
+    prompt_template,
+    partial_variables={
+        "tools": "\n".join([f"- {tool.name}: {tool.description}" for tool in tools]),
+        "tool_names": ", ".join([tool.name for tool in tools]),
+    },
+)
+
+
+
 **Code Examples**:
 
 1. **Basic Query**:
