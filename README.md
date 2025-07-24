@@ -41,7 +41,7 @@ This guide provides detailed setup instructions, code examples, and usage detail
    ```
 
 
-3. **Agent Integration**:
+2. **Agent Integration**:
    ```python
    from langchain.agents import create_react_agent, AgentExecutor
    from langchain_core.prompts import PromptTemplate
@@ -57,6 +57,98 @@ This guide provides detailed setup instructions, code examples, and usage detail
    print(result)
    # Output: Summary of Python programming language from Wikipedia
    ```
+create_react_agent: A function to create a ReAct-style agent (Reasoning + Acting), which uses LLMs to decide actions (e.g., tool usage).
+
+AgentExecutor: Runs the agent in a loop, executing actions (tools) until a final answer is produced.
+
+PromptTemplate: Helps structure prompts dynamically (here, it's a simple template with {input}).
+
+FakeListLLM: A mock LLM for testing—it returns predefined responses instead of calling a real model.
+FakeListLLM is given a single hardcoded response:
+"Use Wikipedia to find info about Python".
+This simulates an LLM deciding to use Wikipedia to answer the question.
+
+# Agent Decision-Making Flow
+
+When an agent receives a query, it goes through these steps:
+
+## Step 1: Reasoning (LLM Decides the Next Action)
+
+The LLM analyzes the input and decides:
+
+- Should it use a tool? (e.g., Wikipedia, calculator, web search)
+- Should it answer directly? (if no tool is needed)
+
+The decision is influenced by:
+
+1. The prompt template (which guides the LLM on when to use tools)
+2. The available tools (the agent knows what tools it has access to)
+3. The LLM's reasoning ability (better models like GPT-4 make smarter decisions)
+
+## Step 2: Acting (If a Tool is Selected)
+
+If the LLM decides to use a tool:
+
+1. It generates a structured request (e.g., `Wikipedia.search("Python")`)
+2. The AgentExecutor runs the tool and gets the result
+
+If no tool is needed, the LLM responds directly.
+
+## Step 3: Repeat or Final Answer
+
+The agent checks if the answer is complete:
+
+- If more info is needed, it loops back to Step 1
+- If satisfied, it returns the final response
+
+## What Influences the Agent's Decision?
+
+### (A) Prompt Engineering (Most Important)
+
+The prompt template tells the LLM how to reason and when to use tools.
+
+**Example (ReAct-style prompt):**
+"Answer the question step by step. Use tools if needed.
+Question: {input}
+Thought: Should I use a tool? Yes, because Wikipedia has reliable info.
+Action: Wikipedia
+Action Input: Python programming language"
+
+
+Without proper prompting, the agent may not use tools effectively.
+
+### (B) Available Tools
+
+- The agent only knows about the tools provided (e.g., WikipediaQueryRun, Calculator)
+- If no relevant tool exists, it will try to answer directly (even if poorly)
+
+### (C) LLM's Capability
+
+- Stronger LLMs (GPT-4, Claude, etc.) make better decisions
+- Weaker LLMs (smaller models) may fail to use tools correctly
+
+## Example: How the Agent Chooses to Use Wikipedia
+
+**Scenario:** Question = "What is Python?"
+
+**Agent's Thought Process:**
+1. "This is a factual question. Wikipedia has reliable info."
+2. "I should use the Wikipedia tool."
+
+**Action Taken:**
+- Calls `WikipediaQueryRun("Python programming language")`
+
+**Result:**
+- Returns a summary from Wikipedia
+
+**Scenario:** Question = "Hi, how are you?"
+
+**Agent's Thought Process:**
+1. "This is a casual greeting, no tool needed."
+
+**Action Taken:**
+- Responds directly: "I'm just a computer program, but thanks for asking!"
+
 
 **Commands**:
 - `tool.invoke(query)`: Executes a Wikipedia search with the given query string.
