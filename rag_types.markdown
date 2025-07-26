@@ -2,9 +2,6 @@
 
 Discover the different types of RAG (Retrieval-Augmented Generation) and how they enhance AI models. Learn about Naive RAG, Advanced RAG, Agentic RAG, and more in this in-depth guide.
 
-**Bhavik Jikadara**
-
-7 min read · Feb 14, 2025
 
 Retrieval-augmented generation (RAG) is a powerful AI technique that combines information retrieval with text generation. Instead of relying solely on pre-trained knowledge, RAG pulls real-time data from external sources, ensuring more accurate and up-to-date responses. This makes AI models more reliable, especially for applications that require fresh and factual information.
 
