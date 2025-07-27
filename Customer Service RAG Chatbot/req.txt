@@ -1,0 +1,14 @@
+# FastAPI and server dependencies
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-dotenv==1.0.1
+
+# LangChain and related dependencies
+langchain==0.2.16
+langchain-openai==0.1.23  # For OpenAI LLM integration; replace with your LLM provider (e.g., langchain-huggingface)
+faiss-cpu==1.8.0.post1    # For vector storage and retrieval
+pydantic==2.8.2           # For data validation
+
+# Additional dependencies for text processing and embeddings
+tiktoken==0.7.0           # For tokenization with OpenAI models
+sentence-transformers==3.0.1  # For generating embeddings
