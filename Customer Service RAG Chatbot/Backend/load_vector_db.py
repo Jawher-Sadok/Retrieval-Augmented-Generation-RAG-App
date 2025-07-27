@@ -43,7 +43,7 @@ def load_and_process_documents(file_path: str) -> bool:
 if __name__ == "__main__":
     import sys
     if len(sys.argv) != 2:
-        print("Usage: python load_vector_db.py <path_to_file>")
+        print("Usage: python load_vector_db.py <path_to_file>") #change "path_to_file" by your file path
         sys.exit(1)
     file_path = sys.argv[1]
     load_and_process_documents(file_path)
